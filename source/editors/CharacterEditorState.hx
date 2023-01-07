@@ -1033,7 +1033,7 @@ class CharacterEditorState extends MusicBeatState
 
 		#if MODS_ALLOWED
 		characterList = [];
-		var directories:Array<String> = [Paths.mods('characters/'), Paths.mods(Paths.currentModDirectory + '/characters/'), Paths.getPreloadPath('characters/')];
+		var directories:Array<String> = [Paths.mods('characters/'), Paths.mods(Paths.currentModDirectory + '/characters/'), SUtil.getStorageDirectory() + Paths.getPreloadPath('characters/')];
 		for (i in 0...directories.length) {
 			var directory:String = directories[i];
 			if(FileSystem.exists(directory)) {
@@ -1134,7 +1134,7 @@ class CharacterEditorState extends MusicBeatState
 			if (FlxG.keys.pressed.I || FlxG.keys.pressed.J || FlxG.keys.pressed.K || FlxG.keys.pressed.L)
 			{
 				var addToCam:Float = 500 * elapsed;
-				if (FlxG.keys.pressed.SHIFT)
+				if (FlxG.keys.pressed.SHIFT || virtualPad.buttonB.justPressed)
 					addToCam *= 4;
 
 				if (FlxG.keys.pressed.I)
@@ -1186,7 +1186,7 @@ class CharacterEditorState extends MusicBeatState
 				
 				for (i in 0...controlArray.length) {
 					if(controlArray[i]) {
-						var holdShift = FlxG.keys.pressed.SHIFT;
+						var holdShift = FlxG.keys.pressed.SHIFT || virtualPad.buttonB.justPressed;
 						var multiplier = 1;
 						if (holdShift)
 							multiplier = 10;
