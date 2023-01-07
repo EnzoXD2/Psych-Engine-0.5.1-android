@@ -141,7 +141,7 @@ class Paths
 			return file;
 		}
 		#end
-		return Main.getDataPath() + 'assets/videos/$key.$VIDEO_EXT';
+		return SUtil.getStorageDirectory() + 'assets/videos/$key.$VIDEO_EXT';
 	}
 
 	static public function sound(key:String, ?library:String):Dynamic
@@ -239,21 +239,21 @@ class Paths
 			return File.getContent(mods(key));
 		#end
 
-		if (FileSystem.exists(Main.getDataPath() + getPreloadPath(key)))
-			return File.getContent(Main.getDataPath() + getPreloadPath(key));
+		if (FileSystem.exists(SUtil.getStorageDirectory() + getPreloadPath(key)))
+			return File.getContent(SUtil.getStorageDirectory() + getPreloadPath(key));
 
 		if (currentLevel != null)
 		{
 			var levelPath:String = '';
 			if(currentLevel != 'shared') {
 				levelPath = getLibraryPathForce(key, currentLevel);
-				if (FileSystem.exists(Main.getDataPath() + levelPath))
-					return File.getContent(Main.getDataPath() + levelPath);
+				if (FileSystem.exists(SUtil.getStorageDirectory() + levelPath))
+					return File.getContent(SUtil.getStorageDirectory() + levelPath);
 			}
 
 			levelPath = getLibraryPathForce(key, 'shared');
-			if (FileSystem.exists(Main.getDataPath() + levelPath))
-				return File.getContent(Main.getDataPath() + levelPath);
+			if (FileSystem.exists(SUtil.getStorageDirectory() + levelPath))
+				return File.getContent(SUtil.getStorageDirectory() + levelPath);
 		}
 		#end
 		return File.getContent(getPath(key, TEXT));
@@ -267,7 +267,7 @@ class Paths
 			return file;
 		}
 		#end
-		return Main.getDataPath() + 'assets/fonts/$key';
+		return SUtil.getStorageDirectory() + 'assets/fonts/$key';
 	}
 
 	inline static public function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false, ?library:String)
@@ -380,7 +380,7 @@ class Paths
 				return fileToCheck;
 			}
 		}
-		return Main.getDataPath() + 'mods/' + key;
+		return SUtil.getStorageDirectory() + 'mods/' + key;
 	}
 
 	static public function getModDirectories():Array<String> {
