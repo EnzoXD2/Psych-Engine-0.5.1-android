@@ -186,6 +186,9 @@ class FreeplayState extends MusicBeatState
 		text.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, RIGHT);
 		text.scrollFactor.set();
 		add(text);
+		#if android
+		addVirtualPad(LEFT_FULL, A_B_C_X_Y);
+		#end
 		super.create();
 	}
 
@@ -277,11 +280,11 @@ class FreeplayState extends MusicBeatState
 			MusicBeatState.switchState(new MainMenuState());
 		}
 
-		if(ctrl)
+		if(ctrl || virtualPad.buttonC.justPressed)
 		{
 			openSubState(new GameplayChangersSubstate());
 		}
-		else if(space)
+		else if(space || virtualPad.buttonX.justPressed)
 		{
 			if(instPlaying != curSelected)
 			{
